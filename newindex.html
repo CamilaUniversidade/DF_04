@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1 align="center"><b>CALCULADORA E CLEAN CODE</b></h1>
+
+    <label for="valor1">Valor: </label>
+    <input type="text" id="valor1" />
+    <br><br>
+
+    <label for="valor2">Valor: </label>
+    <input type="text" id="valor2" />
+    <br><br>
+
+    <input type="button" value="Somar"       onclick="calculadora('soma')" />
+    <input type="button" value="Subtrair"    onclick="calculadora('subt')" />
+    <input type="button" value="Multiplicar" onclick="calculadora('mult')" />
+    <input type="button" value="Dividir"     onclick="calculadora('divi')" />
+    <br><br>
+
+    <label for="resultado">Resultado: </label>
+    <input type="text" id="resultado" readonly />
+
+    <script>
+      function calculadora(operacao) {
+        var valor1HTML = document.getElementById("valor1").value;
+        var valor2HTML = document.getElementById("valor2").value;
+
+        logar("Valor de A: " + valor1HTML);
+        logar("Valor de B: " + valor2HTML);
+
+        var valor1 = parseInt(valor1HTML);
+        var valor2 = parseInt(valor2HTML);
+        var resultado = 0;
+        
+        if (operacao === 'soma') {
+            resultado = soma(valor1, valor2);
+        } else if (operacao === 'subt') {
+            resultado = subt(valor1, valor2);
+        } else if (operacao === 'mult') { 
+            resultado = mult(valor1, valor2);
+        } else if (operacao === 'divi') {
+            resultado = fivi(valor1, valor2);
+        }
+
+        Resultado(resultado);
+      }  
+
+      function soma(valor1, valor2) {           
+          if (ValidarOperacaoMatematica(valor1, valor2)) { return valor1 + valor2; }            
+      }
+
+      function subt(valor1, valor2) {           
+          if (ValidarOperacaoMatematica(valor1, valor2)) { return valor1 - valor2; }            
+      }
+
+      function mult(valor1, valor2) {           
+          if (ValidarOperacaoMatematica(valor1, valor2)) { return valor1 * valor2; }            
+      }
+
+      function divi(valor1, valor2) {           
+          if (ValidarOperacaoMatematica(valor1, valor2) && valor2 > 0) { return valor1 / valor2; }            
+      }
+
+      function ValidarOperacaoMatematica(numero1, numero2) {
+          if (ValidarNumeroPositivo(numero1) && 
+              ValidarNumeroPositivo(numero2)) {
+                  return true;
+              } return false;
+      }
+
+      function ValidarNumeroPositivo(numero) {
+          if (numero > 0) {
+              return true;
+          } return false;
+      }
+      
+      function Resultado(resultado) { document.getElementById("resultado").value = resultado; }
+      
+      function logar(mensagem) { console.log(mensagem); }
+    </script>
+</body>
+</html>
